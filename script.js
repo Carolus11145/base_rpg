@@ -96,7 +96,7 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
-function update(location) {
+const update = (location) => {
   monsterStats.style.display = "none";
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
@@ -107,19 +107,19 @@ function update(location) {
   text.innerHTML = location.text;
 }
 
-function goTown() {
+const goTown = () => {
   update(locations[0]);
 }
 
-function goStore() {
+const goStore = () => {
   update(locations[1]);
 }
 
-function goCave() {
+const goCave = () => {
   update(locations[2]);
 }
 
-function buyHealth() {
+const buyHealth = () => {
   if (gold >= 10) {
     gold -= 10;
     health += 10;
@@ -130,7 +130,7 @@ function buyHealth() {
   }
 }
 
-function buyWeapon() {
+const buyWeapon = () => {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
       gold -= 30;
@@ -150,7 +150,7 @@ function buyWeapon() {
   }
 }
 
-function sellWeapon() {
+const sellWeapon = () => {
   if (inventory.length > 1) {
     gold += 15;
     goldText.innerText = gold;
@@ -162,22 +162,22 @@ function sellWeapon() {
   }
 }
 
-function fightSlime() {
+const fightSlime = () => {
   fighting = 0;
   goFight();
 }
 
-function fightBeast() {
+const fightBeast = () => {
   fighting = 1;
   goFight();
 }
 
-function fightDragon() {
+const fightDragon = () => {
   fighting = 2;
   goFight();
 }
 
-function goFight() {
+const goFight = () => {
   update(locations[3]);
   monsterHealth = monsters[fighting].health;
   monsterStats.style.display = "block";
@@ -185,7 +185,7 @@ function goFight() {
   monsterHealthText.innerText = monsterHealth;
 }
 
-function attack() {
+const attack = () => {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
@@ -211,21 +211,21 @@ function attack() {
   }
 }
 
-function getMonsterAttackValue(level) {
+const getMonsterAttackValue = (level) => {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
   console.log(hit);
   return hit > 0 ? hit : 0;
 }
 
-function isMonsterHit() {
+const isMonsterHit = () => {
   return Math.random() > .2 || health < 20;
 }
 
-function dodge() {
+const dodge = () => {
   text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 }
 
-function defeatMonster() {
+const defeatMonster = () => {
   gold += Math.floor(monsters[fighting].level * 6.7);
   xp += monsters[fighting].level;
   goldText.innerText = gold;
@@ -233,15 +233,15 @@ function defeatMonster() {
   update(locations[4]);
 }
 
-function lose() {
+const lose = () => {
   update(locations[5]);
 }
 
-function winGame() {
+const winGame = () => {
   update(locations[6]);
 }
 
-function restart() {
+const restart = () => {
   xp = 0;
   health = 100;
   gold = 50;
@@ -253,19 +253,19 @@ function restart() {
   goTown();
 }
 
-function easterEgg() {
+const easterEgg = () => {
   update(locations[7]);
 }
 
-function pickTwo() {
+const pickTwo = () => {
   pick(2);
 }
 
-function pickEight() {
+const pickEight = () => {
   pick(8);
 }
 
-function pick(guess) {
+const pick = (guess) => {
   const numbers = [];
   while (numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 11));
